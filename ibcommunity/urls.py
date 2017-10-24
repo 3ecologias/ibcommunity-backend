@@ -13,9 +13,21 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
+from rest_framework_jwt import views as jwt_views
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^', include('accounts.urls', namespace='accounts')),
+    url(r'^', include('project.urls', namespace='project')),
+    url(r'^', include('company.urls', namespace='company')),
+    # url(r'^account/', include('djoser.urls')),
+    # url(r'^auth/login/', jwt_views.obtain_jwt_token, name='auth'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
