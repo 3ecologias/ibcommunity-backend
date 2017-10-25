@@ -3,47 +3,59 @@ from rest_framework import serializers
 from .models import Community, CommunityContacts, CommunityLeadership, CommunityLeadershipType,\
                     CommunityPicture, CommunitySchools, CommunityBiomes, CommunityBiomesPicture
 
+from address.models import Address
+from address.serializers import AddressSerializer
+from product.serializers import ProductSerializer
+
 
 class CommunityLeadershipTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CommunityLeadershipType
-        fields = ('description',)
+        fields = ('id', 'description',)
+        read_only_fields = ('id',)
 
 
 class CommunityLeadershipSerializer(serializers.ModelSerializer):
 
+    type = CommunityLeadershipTypeSerializer()
+
     class Meta:
         model = CommunityLeadership
-        fields = ('name', 'phone', 'type')
+        fields = ('id','name', 'phone', 'type',)
+        read_only_fields = ('id',)
 
 
 class CommunityContactsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CommunityContacts
-        fields = ('name', 'phone', 'contact_type')
+        fields = ('id', 'name', 'phone', 'contact_type')
+        read_only_fields = ('id',)
 
 
 class CommunityPictureSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CommunityPicture
-        fields = ('name', 'image', 'community')
+        fields = ('id', 'name', 'image', 'community')
+        read_only_fields = ('id',)
 
 
 class CommunitySchoolSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CommunitySchools
-        fields = ('name', 'levels', 'community')
+        fields = ('id', 'name', 'levels', 'community')
+        read_only_fields = ('id',)
 
 
 class CommunityBiomesPictureSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CommunityBiomesPicture
-        fields = ('name', 'image', 'biome')
+        fields = ('id', 'name', 'image', 'biome')
+        read_only_fields = ('id',)
 
 
 class CommunityBiomesSerializer(serializers.ModelSerializer):
@@ -52,23 +64,62 @@ class CommunityBiomesSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CommunityBiomes
-        fields = ('characteristics', 'type', 'threatened_species', 'phytophysionomy', 'ground_type',
+        fields = ('id', 'characteristics', 'type', 'threatened_species', 'phytophysionomy', 'ground_type',
                   'images')
+        read_only_fields = ('id',)
 
 
 class CommunitySerializer(serializers.ModelSerializer):
 
-    leadership = CommunityLeadershipSerializer(many=True)
+    leadership = CommunityLeadershipSerializer()
     contacts = CommunityContactsSerializer(many=True)
     images = CommunityPictureSerializer(many=True)
     schools = CommunitySchoolSerializer(many=True)
     biomes = CommunityBiomesSerializer(many=True)
+    address = AddressSerializer()
+    products = ProductSerializer(many=True)
 
     class Meta:
         model = Community
-        fields = ('name', 'geo_lat', 'geo_long', 'distance_from_capital',
+        fields = ('id', 'name', 'geo_lat', 'geo_long', 'distance_from_capital',
                   'idh_state', 'idh_city', 'energy_type', 'families_number',
                   'religion', 'traditional_culture', 'craftwork', 'traditional_events',
                   'sanctuaries', 'hospitals_number', 'ready_care_number', 'psf_number',
                   'address', 'leadership', 'products', 'contacts', 'images', 'schools',
                   'biomes')
+        read_only_fields = ('id',)
+
+    def create(self, validated_data):
+        address_data = validated_data.pop('address')
+        address = Address.objects.create(**address_data)
+
+        community = Community(**validated_data)
+        community.address = address
+        community.save()
+
+        leaderships_data = validated_data.pop('leadership')
+
+        for leadership_data in leaderships_data:
+            CommunityLeadership.objects.create(community=community, **leadership_data)
+
+        contacts_data = validated_data.pop('contacts')
+
+        for contact_data in contacts_data:
+            CommunityContacts.objects.create(community=community, **contact_data)
+
+        images_data = validated_data.pop('images')
+
+        for image_data in images_data:
+            CommunityPicture.objects.create(community=community, **image_data)
+
+        schools_data = validated_data.pop('schools')
+
+        for school_data in schools_data:
+            CommunitySchools.objects.create(community=community, **school_data)
+
+        biomes_data = validated_data.pop('biomes')
+
+        for biome_data in biomes_data:
+            CommunityBiomes.objects.create(community=community, **biome_data)
+
+        return community

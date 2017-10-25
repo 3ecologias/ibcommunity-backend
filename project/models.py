@@ -11,6 +11,9 @@ class ProjectCategory(models.Model):
         verbose_name = _("Categoria de projeto")
         verbose_name_plural = _("Categorias de projeto")
 
+    def __str__(self):
+        return self.name
+
 
 class Project(models.Model):
     name = models.CharField(_("Nome"), max_length=255, blank=True)
@@ -23,11 +26,13 @@ class Project(models.Model):
     schedule = models.FileField(_("Cronograma"),
                                 upload_to="project/schedules/%y/%m",
                                 blank=True,
+                                null=True,
                                 help_text=_("Arquivo PDF com o cronograma do projeto"))
     target_audience = models.TextField(_("Público alvo"), blank=True)
     budget = models.FileField(_("Orçamento"),
                               upload_to="project/budgets/%y/%m",
                               blank=True,
+                              null=True,
                               help_text=_("Aquivo PDF com o orçamento do projeto"))
     project_totals = models.DecimalField(_("Valor total do projeto"),
                                          max_digits=20,

@@ -6,8 +6,8 @@ from .serializers import CommunitySerializer
 
 
 class CommunityList(mixins.ListModelMixin,
-                  mixins.CreateModelMixin,
-                  generics.GenericAPIView):
+                    mixins.CreateModelMixin,
+                    generics.GenericAPIView):
 
     queryset = Community.objects.all()
     serializer_class = CommunitySerializer
@@ -20,9 +20,9 @@ class CommunityList(mixins.ListModelMixin,
 
 
 class CommunityDetail(mixins.RetrieveModelMixin,
-                    mixins.UpdateModelMixin,
-                    mixins.DestroyModelMixin,
-                    generics.GenericAPIView):
+                      mixins.UpdateModelMixin,
+                      mixins.DestroyModelMixin,
+                      generics.GenericAPIView):
 
     queryset = Community.objects.all()
     serializer_class = CommunitySerializer

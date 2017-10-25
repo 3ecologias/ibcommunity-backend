@@ -4,10 +4,10 @@ from .views import ProjectList, ProjectDetail, ProjectCategoryList, ProjectCateg
 
 
 urlpatterns = [
-    url(r'^projects/$', ProjectList.as_view(), name='project-list'),
-    url(r'^projects/(?P<pk>[0-9]+)/$', ProjectDetail.as_view(), name='project-detail'),
-    url(r'^projects/category/$', ProjectCategoryList.as_view(), name='category-list'),
-    url(r'^projects/category/(?P<pk>[0-9]+)/$', ProjectCategoryDetail.as_view(), name='category-detail'),
+    url(r'^project/$', ProjectList.as_view(), name='project-list'),
+    url(r'^project/(?P<pk>[0-9]+)/$', ProjectDetail.as_view(), name='project-detail'),
+    url(r'^project/category/$', ProjectCategoryList.as_view(), name='category-list'),
+    url(r'^project/category/(?P<pk>[0-9]+)/$', ProjectCategoryDetail.as_view(), name='category-detail'),
 ]
 
 

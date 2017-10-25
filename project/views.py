@@ -38,8 +38,8 @@ class ProjectDetail(mixins.RetrieveModelMixin,
 
 
 class ProjectCategoryList(mixins.ListModelMixin,
-                  mixins.CreateModelMixin,
-                  generics.GenericAPIView):
+                          mixins.CreateModelMixin,
+                          generics.GenericAPIView):
 
     queryset = ProjectCategory.objects.all()
     serializer_class = ProjectCategorySerializer
@@ -52,9 +52,9 @@ class ProjectCategoryList(mixins.ListModelMixin,
 
 
 class ProjectCategoryDetail(mixins.RetrieveModelMixin,
-                    mixins.UpdateModelMixin,
-                    mixins.DestroyModelMixin,
-                    generics.GenericAPIView):
+                            mixins.UpdateModelMixin,
+                            mixins.DestroyModelMixin,
+                            generics.GenericAPIView):
 
     queryset = ProjectCategory.objects.all()
     serializer_class = ProjectCategorySerializer

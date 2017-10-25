@@ -25,6 +25,9 @@ urlpatterns = [
     url(r'^', include('accounts.urls', namespace='accounts')),
     url(r'^', include('project.urls', namespace='project')),
     url(r'^', include('company.urls', namespace='company')),
+    url(r'^', include('address.urls', namespace='address')),
+    url(r'^', include('product.urls', namespace='product')),
+    url(r'^', include('community.urls', namespace='community')),
     # url(r'^account/', include('djoser.urls')),
     # url(r'^auth/login/', jwt_views.obtain_jwt_token, name='auth'),
 ]

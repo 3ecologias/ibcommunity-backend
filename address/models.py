@@ -19,7 +19,6 @@ class Address(models.Model):
         verbose_name_plural = _("Endereços")
         ordering = ['-created_at']
 
-
     def __str__(self):
         return self.street
 
