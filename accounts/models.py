@@ -36,10 +36,9 @@ class Client(models.Model):
     user = models.OneToOneField(User, verbose_name=_("Cliente"),
                                 on_delete=models.CASCADE,
                                 related_name='client')
-    company_name = models.CharField(_("Nome da empresa"), max_length=255, blank=False)
     company = models.OneToOneField(Company, verbose_name=_("Empresa"),
-                                           on_delete=models.CASCADE,
-                                           related_name="client")
+                                   on_delete=models.CASCADE,
+                                   related_name="clients")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

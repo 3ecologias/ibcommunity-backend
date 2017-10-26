@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from community.models import Community
+from accounts.models import Client
 
 
 class ProjectCategory(models.Model):
@@ -58,6 +59,8 @@ class Project(models.Model):
                                       related_name="project_categories", blank=True)
     community = models.ForeignKey(Community, verbose_name=_("Comunidade"), related_name="community_projects",
                                   blank=True, null=True)
+    client = models.ForeignKey(Client, verbose_name=_("Cliente apoiador"), related_name="supported_projects",
+                               blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

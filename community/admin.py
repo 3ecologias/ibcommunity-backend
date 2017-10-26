@@ -38,6 +38,7 @@ class CommunityBiomesAdmin(admin.ModelAdmin):
         CommunityBiomesPicturesInline
     ]
 
+
 admin.site.register(CommunityLeadershipType)
 admin.site.register(CommunityLeadership)
 admin.site.register(Community, CommunityAdmin)

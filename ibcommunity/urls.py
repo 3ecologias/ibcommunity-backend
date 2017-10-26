@@ -17,7 +17,6 @@ from django.conf.urls import url, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from rest_framework_jwt import views as jwt_views
 
 
 urlpatterns = [
@@ -28,8 +27,7 @@ urlpatterns = [
     url(r'^', include('address.urls', namespace='address')),
     url(r'^', include('product.urls', namespace='product')),
     url(r'^', include('community.urls', namespace='community')),
-    # url(r'^account/', include('djoser.urls')),
-    # url(r'^auth/login/', jwt_views.obtain_jwt_token, name='auth'),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
 
 if settings.DEBUG:
