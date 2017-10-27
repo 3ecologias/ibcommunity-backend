@@ -20,6 +20,7 @@ from django.contrib import admin
 
 
 urlpatterns = [
+    url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', admin.site.urls),
     url(r'^', include('accounts.urls', namespace='accounts')),
     url(r'^', include('project.urls', namespace='project')),
