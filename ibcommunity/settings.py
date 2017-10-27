@@ -2,7 +2,7 @@ import os
 import environ
 
 # Localizate the root dir, two levels above
-ROOT_DIR = environ.Path(__file__) - 1
+ROOT_DIR = environ.Path(__file__) - 2
 APPS_DIR = ROOT_DIR.path('ibcommunity')
 
 # Loads .env file
