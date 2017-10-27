@@ -24,7 +24,7 @@ SECRET_KEY = env('IB_SECRET_KEY')
 DEBUG = env.bool('IB_DEBUG')
 
 if DEBUG:
-    ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = ['*']
 else:
     ALLOWED_HOSTS = env.list('IB_ALLOWED_HOSTS')
 
