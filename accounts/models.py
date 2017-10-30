@@ -36,7 +36,7 @@ class Client(models.Model):
     user = models.OneToOneField(User, verbose_name=_("Cliente"),
                                 on_delete=models.CASCADE,
                                 related_name='client')
-    company = models.OneToOneField(Company, verbose_name=_("Empresa"),
+    company = models.ForeignKey(Company, verbose_name=_("Empresa"),
                                    on_delete=models.CASCADE,
                                    related_name="clients")
     created_at = models.DateTimeField(auto_now_add=True)

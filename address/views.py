@@ -1,8 +1,10 @@
-from rest_framework import generics
-from rest_framework import mixins
+from rest_framework import generics, mixins, permissions
 
 from .serializers import AddressSerializer
 from .models import Address
+from .permissions import IsAddressOwnerOrAdmin
+
+from accounts.permissions import IsAdmin
 
 
 class AddressList(mixins.CreateModelMixin,
@@ -11,9 +13,18 @@ class AddressList(mixins.CreateModelMixin,
 
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
+    permission_classes = [permissions.IsAuthenticated,
+                          IsAdmin]
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
+
+class AddressCreate(mixins.CreateModelMixin,
+                    generics.GenericAPIView):
+    queryset = Address.objects.all()
+    serializer_class = AddressSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
@@ -26,6 +37,8 @@ class AddressDetail(mixins.DestroyModelMixin,
 
     queryset = Address.objects.all()
     serializer_class = AddressSerializer
+    permission_classes = [permissions.IsAuthenticated,
+                          IsAddressOwnerOrAdmin]
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)

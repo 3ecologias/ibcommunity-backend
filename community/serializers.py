@@ -123,3 +123,12 @@ class CommunitySerializer(serializers.ModelSerializer):
             CommunityBiomes.objects.create(community=community, **biome_data)
 
         return community
+
+
+class CommunityListSerializer(serializers.ModelSerializer):
+    address = AddressSerializer()
+    images = CommunityPictureSerializer(many=True)
+
+    class Meta:
+        model = Community
+        fields = ('name', 'address', 'images')

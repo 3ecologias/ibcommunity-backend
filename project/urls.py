@@ -7,13 +7,13 @@ from .views import ProjectList, ProjectDetail, ProjectUpdate, ProjectCreate, \
 
 urlpatterns = [
     # Projects
-    url(r'^projects/$', ProjectList.as_view(), name='project-list'),
+    url(r'^project/list/$', ProjectList.as_view(), name='project-list'),
     url(r'^project/create/$', ProjectCreate.as_view(), name='project-create'),
     url(r'^project/update/(?P<pk>[0-9]+)/$', ProjectUpdate.as_view(), name='project-update'),
     url(r'^project/detail/(?P<pk>[0-9]+)/$', ProjectDetail.as_view(), name='project-detail'),
 
     # Project Categories
-    url(r'^project/categories/$', ProjectCategoryList.as_view(), name='category-list'),
+    url(r'^project/category/list/$', ProjectCategoryList.as_view(), name='category-list'),
     url(r'^project/category/create/$', ProjectCategoryCreate.as_view(), name='category-create'),
     url(r'^project/category/detail/(?P<pk>[0-9]+)/$', ProjectCategoryDetail.as_view(), name='category-detail'),
     url(r'^project/category/update/(?P<pk>[0-9]+)/$', ProjectCategoryUpdate.as_view(), name='category-update'),
