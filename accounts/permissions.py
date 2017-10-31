@@ -45,10 +45,12 @@ class IsManagerOrAdmin(IsAdmin):
 class IsManagerClientOrAdmin(IsAdmin):
 
     def has_permission(self, request, view):
+
         if hasattr(request.user, 'profile'):
             profile = request.user.profile
             if profile.is_manager or hasattr(request.user, 'client'):
                 return True
+
         return super(IsManagerClientOrAdmin, self).has_permission(request, view)
 
 # Object level permissions
