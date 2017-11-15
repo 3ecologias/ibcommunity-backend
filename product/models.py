@@ -21,11 +21,11 @@ class ProductCollectionPoint(models.Model):
 
 class Product(models.Model):
     scientific_name = models.CharField(_("Nome científico"), max_length=255,
-                                       blank=False)
+                                       blank=True, null=True)
     common_name = models.CharField(_("Nome popular"), max_length=255, blank=False)
-    provenance = models.CharField(_("Procedência"), max_length=255, blank=False,
+    provenance = models.CharField(_("Procedência"), max_length=255, blank=True, null=True,
                                   choices=PROVENANCE_TYPE)
-    is_threatened = models.BooleanField(_("Espécie ameaçada?"), blank=False)
+    is_threatened = models.BooleanField(_("Espécie ameaçada?"), blank=True)
     fruit_anual_volume = models.PositiveIntegerField(_("Voume anual do fruto"),
                                                      default=0, help_text=_("Em KG"))
     seed_anual_volume = models.PositiveIntegerField(_("Voume anual da semente"),
@@ -34,12 +34,12 @@ class Product(models.Model):
                                                      default=0, help_text=_("Em KG"))
     harvest_period = models.TextField(_("Período da safra"), blank=True, null=True,
                                       help_text=_("Informações sobre o período da safra"))
-    certification_origin = models.TextField(_("Orgão da certificação"), blank=True,
+    certification_origin = models.TextField(_("Orgão da certificação"), blank=True, null=True,
                                             help_text=_("Informações sobre o orgão que expediu\
                                                         a certificação do produto."))
-    benefit_sharing_value = models.TextField(_("Regra de repartição de benefício"), blank=False)
+    benefit_sharing_value = models.TextField(_("Regra de repartição de benefício"), blank=False, null=True)
     collection_point = models.OneToOneField(ProductCollectionPoint, verbose_name=_("Local de coleta/colheita"),
-                                            related_name='products_collect')
+                                            related_name='products_collect', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

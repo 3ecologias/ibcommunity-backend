@@ -17,13 +17,13 @@ class ProjectCategory(models.Model):
 
 
 class Project(models.Model):
-    name = models.CharField(_("Nome"), max_length=255, blank=True)
-    target_area = models.TextField(_("Área de atuação"), blank=True)
-    theme_description = models.TextField(_("Tema"), blank=True)
-    goals = models.TextField(_("Objetivos"), blank=True)
+    name = models.CharField(_("Nome"), max_length=255, blank=False)
+    target_area = models.TextField(_("Área de atuação"), blank=True, null=True)
+    theme_description = models.TextField(_("Tema"), blank=True, null=True)
+    goals = models.TextField(_("Objetivos"), blank=True, null=True)
     specific_goals = models.TextField(_("Objetivos específicos"), blank=True, null=True)
-    activities = models.TextField(_("Atividades a serem desenvolvidas"), blank=True)
-    results = models.TextField(_("Resultados esperados"), blank=True)
+    activities = models.TextField(_("Atividades a serem desenvolvidas"), blank=True, null=True)
+    results = models.TextField(_("Resultados esperados"), blank=True, null=True)
     schedule = models.FileField(_("Cronograma"),
                                 upload_to="project/schedules/%y/%m",
                                 blank=True,
@@ -51,7 +51,7 @@ class Project(models.Model):
                                          help_text=_("Assinala caso seja projeto de visita\
                                                      comunitária"))
     future_vision = models.TextField(_("Visão de futuro"),
-                                     blank=True,
+                                     blank=True, null=True,
                                      help_text=_("Breve resumo de qual seria a visão de futuro \
                                                  da comunidade com a execução do projeto."))
 

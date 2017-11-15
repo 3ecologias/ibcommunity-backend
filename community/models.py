@@ -67,7 +67,7 @@ class Community(models.Model):
     psf_number = models.PositiveIntegerField(_("Número de psf's"), blank=True, null=True,
                                              default=0)
     address = models.ForeignKey(Address, verbose_name=_("Endereço"), related_name="community")
-    leadership = models.ForeignKey(CommunityLeadership, verbose_name=_("Liderança"), blank=False)
+    leadership = models.ForeignKey(CommunityLeadership, verbose_name=_("Liderança"), blank=True, null=True)
     products = models.ManyToManyField(Product, verbose_name=_("Produtos"),
                                       related_name="communities", blank=True)
 

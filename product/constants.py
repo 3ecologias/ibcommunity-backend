@@ -1,5 +1,6 @@
 from django.utils.translation import ugettext_lazy as _
 PROVENANCE_TYPE = (
+    (_("desconhecida"), _("Desconhecida")),
     (_("natural"), _("Natural")),
     (_("plantio"), _("Plantio")),
     (_("saf"), _("SAF")),
