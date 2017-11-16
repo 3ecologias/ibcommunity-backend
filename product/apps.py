@@ -4,3 +4,5 @@ from django.utils.translation import ugettext_lazy as _
 class ProductConfig(AppConfig):
     name = 'product'
     verbose_name = _("Produtos")
+    icon = '<i class="material-icons">spa</i>'
+

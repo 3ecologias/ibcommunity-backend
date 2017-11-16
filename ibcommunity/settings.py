@@ -33,7 +33,8 @@ else:
 
 
 DEFAULT_APPS = [
-    'grappelli',
+    # 'grappelli',
+    'material.admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,6 +46,7 @@ DEFAULT_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',
     'djoser',
+    'material',
 ]
 
 LOCAL_APPS = [

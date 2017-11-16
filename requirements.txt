@@ -11,4 +11,5 @@ pytz==2017.2
 django-grappelli==2.10.1
 django-environ==0.4.4
 psycopg2
+django-material==1.1.1
 
