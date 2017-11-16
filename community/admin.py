@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import CommunityLeadershipType, CommunityLeadership,\
     Community, CommunityContacts, CommunityPicture, CommunitySchools,\
-    CommunityBiomes, CommunityBiomesPicture
+    CommunityBiomes, CommunityBiomesPicture, CommunityCraftwork, CommunityCraftworkPicture
 
 
 class CommunityContactsInline(admin.TabularInline):
@@ -20,12 +20,21 @@ class CommunityBiomesInline(admin.StackedInline):
     model = CommunityBiomes
 
 
+class CommunityCraftworkInline(admin.TabularInline):
+    model = CommunityCraftwork
+
+
+class CommunityCraftworkPictureInline(admin.TabularInline):
+    model = CommunityCraftworkPicture
+
+
 class CommunityAdmin(admin.ModelAdmin):
     inlines = [
         CommunityContactsInline,
         CommunityPictureInline,
         CommunitySchoolsInline,
-        CommunityBiomesInline
+        CommunityBiomesInline,
+        CommunityCraftworkInline,
     ]
 
 
@@ -39,6 +48,12 @@ class CommunityBiomesAdmin(admin.ModelAdmin):
     ]
 
 
+class CommunityCraftworkAdmin(admin.ModelAdmin):
+    inlines = [
+        CommunityCraftworkPictureInline
+    ]
+
+
 admin.site.register(CommunityLeadershipType)
 admin.site.register(CommunityLeadership)
 admin.site.register(Community, CommunityAdmin)
@@ -47,3 +62,5 @@ admin.site.register(CommunityPicture)
 admin.site.register(CommunitySchools)
 admin.site.register(CommunityBiomes, CommunityBiomesAdmin)
 admin.site.register(CommunityBiomesPicture)
+admin.site.register(CommunityCraftwork, CommunityCraftworkAdmin)
+admin.site.register(CommunityCraftworkPicture)

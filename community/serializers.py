@@ -1,7 +1,8 @@
 from rest_framework import serializers
 
 from .models import Community, CommunityContacts, CommunityLeadership, CommunityLeadershipType,\
-                    CommunityPicture, CommunitySchools, CommunityBiomes, CommunityBiomesPicture
+                    CommunityPicture, CommunitySchools, CommunityBiomes, CommunityBiomesPicture,\
+                    CommunityCraftwork, CommunityCraftworkPicture
 
 from address.models import Address
 from address.serializers import AddressSerializer
@@ -69,6 +70,21 @@ class CommunityBiomesSerializer(serializers.ModelSerializer):
         read_only_fields = ('id',)
 
 
+class CommunityCraftworkPictureSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = CommunityCraftworkPicture
+        fields = ('id', 'name', 'image', 'craftwork')
+
+
+class CommunityCraftworkSerializer(serializers.ModelSerializer):
+    images = CommunityCraftworkPictureSerializer(many=True)
+
+    class Meta:
+        model = CommunityCraftwork
+        read_only_fields = ('id', 'name', 'price', 'community', 'images')
+
+
 class CommunitySerializer(serializers.ModelSerializer):
 
     leadership = CommunityLeadershipSerializer()
@@ -76,6 +92,7 @@ class CommunitySerializer(serializers.ModelSerializer):
     images = CommunityPictureSerializer(many=True)
     schools = CommunitySchoolSerializer(many=True)
     biomes = CommunityBiomesSerializer(many=True)
+    craftwork = CommunityCraftworkSerializer(many=True)
     address = AddressSerializer()
     products = ProductSerializer(many=True)
 
@@ -121,6 +138,11 @@ class CommunitySerializer(serializers.ModelSerializer):
 
         for biome_data in biomes_data:
             CommunityBiomes.objects.create(community=community, **biome_data)
+
+        craftworks_data = validated_data.pop('craftwork')
+
+        for craftwork_data in craftworks_data:
+            CommunityCraftwork.objects.create(community=community, **craftwork_data)
 
         return community
 

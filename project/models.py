@@ -77,7 +77,7 @@ class Project(models.Model):
 class ProjectPicture(models.Model):
     name = models.CharField(_("Nome da imagem"), max_length=255, blank=True)
     image = models.ImageField(_("Imagem"), upload_to="project/pictures/%y/%m", blank=True)
-    project = models.ForeignKey(Project, verbose_name=_("Project"), blank=True,
+    project = models.ForeignKey(Project, verbose_name=_("Projeto    "), blank=True,
                                 related_name="images")
     uploaded_at = models.DateTimeField(auto_now_add=True)
 

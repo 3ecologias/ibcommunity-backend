@@ -25,6 +25,7 @@ class CommunityLeadership(models.Model):
     name = models.CharField(_("Nome"), max_length=255, blank=False)
     phone = models.CharField(_("Telefone"), max_length=255, blank=False)
     type = models.ForeignKey(CommunityLeadershipType, verbose_name=_("Tipo de liderança"))
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -46,15 +47,12 @@ class Community(models.Model):
     idh_state = models.CharField(_("IDH do estado"), max_length=255, blank=True, null=True)
     idh_city = models.CharField(_("IDH da cidade"), max_length=255, blank=True, null=True)
     energy_type = models.CharField(_("Tipo de energia elétrica"), max_length=255,
-                                   choices=ENERGY_TYPE)
+                                   choices=ENERGY_TYPE, blank=True, null=True)
     families_number = models.PositiveIntegerField(_("Número de famílias"),
                                                   default=0, blank=True, null=True)
     religion = models.CharField(_("Religião predominante"),
                                 max_length=255, blank=True, null=True)
     traditional_culture = models.TextField(_("Manifestações culturais"), blank=True, null=True)
-    craftwork = models.TextField(_("Artesanato"),
-                                 blank=True, null=True,
-                                 help_text=_("tipos de artesanato da comunidade"))
     traditional_events = models.TextField(_("Festas típicas"), blank=True, null=True)
     sanctuaries = models.PositiveIntegerField(_("Número de templos"),
                                               blank=True, null=True,
@@ -83,6 +81,40 @@ class Community(models.Model):
         return self.name
 
 
+class CommunityCraftwork(models.Model):
+    name = models.CharField(_("Nome do produto"), max_length=255, blank=False)
+    price = models.DecimalField(_("Preço"), decimal_places=2, default=0, max_digits=4)
+    community = models.ForeignKey(Community, verbose_name=_("Comunidade"), related_name="craftworks",
+                                  on_delete=models.CASCADE)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = _("Artesanato")
+        verbose_name_plural = _("Artesenatos")
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.name
+
+
+class CommunityCraftworkPicture(models.Model):
+    name = models.CharField(_("Nome da imagem"), max_length=255, blank=False)
+    image = models.ImageField(_("Imagem"), upload_to="community/craftwork/pictures/%y/%m", blank=False)
+    craftwork = models.ForeignKey(CommunityCraftwork, verbose_name=_("Comunidade"), blank=False,
+                                  related_name="images")
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = _("Imagem de artesanato")
+        verbose_name_plural = _("Imagens de artesanato")
+        ordering = ['-uploaded_at']
+
+    def __str__(self):
+        return self.name
+
+
 class CommunityContacts(models.Model):
     name = models.CharField(_("Nome do contato"), max_length=255, blank=False)
     phone = models.CharField(_("Telefone"), max_length=255, blank=False)
@@ -103,7 +135,7 @@ class CommunityContacts(models.Model):
 class CommunityPicture(models.Model):
     name = models.CharField(_("Nome da imagem"), max_length=255, blank=False)
     image = models.ImageField(_("Imagem"), upload_to="community/pictures/%y/%m", blank=False)
-    community = models.ForeignKey(Community, verbose_name=_("Project"), blank=False,
+    community = models.ForeignKey(Community, verbose_name=_("Comunidade"), blank=False,
                                   related_name="images")
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
@@ -157,7 +189,7 @@ class CommunityBiomesPicture(models.Model):
     name = models.CharField(_("Nome da imagem"), max_length=255, blank=False)
     image = models.ImageField(_("Imagem"), upload_to="community/biomes/pictures/%y/%m", blank=False)
     biome = models.ForeignKey(CommunityBiomes, verbose_name=_("Bioma"), blank=False,
-                                  related_name="images")
+                              related_name="images")
     uploaded_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
