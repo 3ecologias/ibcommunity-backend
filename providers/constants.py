@@ -9,7 +9,7 @@ EPI_ORIGIN_CHOICES = ((_('comprados_com_recurso_proprio'),_('Comprados com recur
                       (_('ganhou_de_parceiros'),_('Ganhou de parceiros')),
                       (_('emprestado'),_('Emprestado')))
 
-STORAGE_HYGIENE_CHOICES = ((_('nao_controla'),_('Não controla')),
+HYGIENE_CHOICES = ((_('nao_controla'),_('Não controla')),
                            (_('controla_parcialmente'),_('Controla parcialmente')),
                            (_('controla_totalmente_o_local'),_('Controla totalmente o local')))
 

@@ -55,7 +55,8 @@ LOCAL_APPS = [
     'community',
     'company',
     'product',
-    'project'
+    'project',
+    'providers'
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS

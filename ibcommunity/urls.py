@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^', include('address.urls', namespace='address')),
     url(r'^', include('product.urls', namespace='product')),
     url(r'^', include('community.urls', namespace='community')),
+    url(r'^', include('providers.urls', namespace='providers')),
     url(r'^auth/', include('djoser.urls')),
     url(r'^auth/', include('djoser.urls.jwt')),
 
