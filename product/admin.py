@@ -9,7 +9,7 @@ class ProductHarvestPeriodAdmin(admin.ModelAdmin):
 class ProductAdmin(admin.ModelAdmin):
     icon = '<i class="material-icons">spa</i>'
     search_fields = ['scientific_name', 'common_name']
-    list_filter = ['provenance']
+    list_filter = ['provenance', 'benefit_sharing_value']
     list_display = ['common_name', 'scientific_name', 'collection_point', 'provenance',
                     'seed_anual_volume', 'pulp_anual_volume']
 
