@@ -1,5 +1,9 @@
 from django.contrib import admin
-from .models import Product, ProductCollectionPoint
+from .models import Product, ProductCollectionPoint, ProductHarvestPeriod
+
+
+class ProductHarvestPeriodAdmin(admin.ModelAdmin):
+    icon = '<i class="material-icons">date range</i>'
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -16,3 +20,4 @@ class ProductCollectionPointAdmin(admin.ModelAdmin):
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductCollectionPoint, ProductCollectionPointAdmin)
+admin.site.register(ProductHarvestPeriod, ProductHarvestPeriodAdmin)
