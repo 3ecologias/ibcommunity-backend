@@ -4,6 +4,10 @@ from .models import Product, ProductCollectionPoint
 
 class ProductAdmin(admin.ModelAdmin):
     icon = '<i class="material-icons">spa</i>'
+    search_fields = ['scientific_name', 'common_name']
+    list_filter = ['provenance']
+    list_display = ['common_name', 'scientific_name', 'collection_point', 'provenance',
+                    'seed_anual_volume', 'pulp_anual_volume']
 
 
 class ProductCollectionPointAdmin(admin.ModelAdmin):

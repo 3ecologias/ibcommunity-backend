@@ -1,14 +1,14 @@
 from django.utils.translation import ugettext_lazy as _
 PROVENANCE_TYPE = (
-    (_("natural"), _("Natural")),
-    (_("plantio"), _("Plantio")),
-    (_("saf"), _("SAF")),
+    (_("Natural"), _("Natural")),
+    (_("Plantio"), _("Plantio")),
+    (_("SAF"), _("SAF")),
 )
 
 COLLECTION_TYPE = (
-    (_("area_propria"), _("Área própria")),
-    (_("area_compartilhada"), _("Área compartilhada")),
-    (_("area_cedida"), _("Área cedida")),
-    (_("praia"), _("Praia")),
-    (_("rio"), _("Rio")),
+    (_("Área própria"), _("Área própria")),
+    (_("Área compartilhada"), _("Área compartilhada")),
+    (_("Área cedida"), _("Área cedida")),
+    (_("Praia"), _("Praia")),
+    (_("Rio"), _("Rio")),
 )
