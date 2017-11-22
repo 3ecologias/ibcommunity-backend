@@ -21,7 +21,8 @@ class ProductCollectionPoint(models.Model):
 
 class ProductHarvestPeriod(models.Model):
     harvest_period = models.CharField(_("Período"), max_length=255,
-                                      blank=False, choices=MONTHS_CHOICES)
+                                      blank=False, choices=MONTHS_CHOICES,
+                                      unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
