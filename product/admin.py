@@ -3,7 +3,7 @@ from .models import Product, ProductCollectionPoint, ProductHarvestPeriod
 
 
 class ProductHarvestPeriodAdmin(admin.ModelAdmin):
-    icon = '<i class="material-icons">date range</i>'
+    icon = '<i class="material-icons">date_range</i>'
 
 
 class ProductAdmin(admin.ModelAdmin):
