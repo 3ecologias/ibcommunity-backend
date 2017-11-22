@@ -38,7 +38,7 @@ class Product(models.Model):
                                             help_text=_("Informações sobre o orgão que expediu\
                                                         a certificação do produto."))
     benefit_sharing_value = models.TextField(_("Regra de repartição de benefício"), blank=False, null=True)
-    collection_point = models.OneToOneField(ProductCollectionPoint, verbose_name=_("Local de coleta/colheita"),
+    collection_point = models.ForeignKey(ProductCollectionPoint, verbose_name=_("Local de coleta/colheita"),
                                             related_name='products_collect', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
