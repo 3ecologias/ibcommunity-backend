@@ -1,5 +1,6 @@
 import os
 import environ
+import datetime
 
 # Localizate the root dir, two levels above
 ROOT_DIR = environ.Path(__file__) - 2
@@ -47,6 +48,7 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'djoser',
     'material',
+    'corsheaders'
 ]
 
 LOCAL_APPS = [
@@ -64,6 +66,7 @@ INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -197,6 +200,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Rest Framework Setup
 
 REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.MultiPartParser',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         # 'rest_framework.authentication.SessionAuthentication',
@@ -205,4 +213,17 @@ REST_FRAMEWORK = {
 
 JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(weeks=1),
 }
+
+# Cors Configuration
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+)

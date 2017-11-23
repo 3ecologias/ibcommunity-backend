@@ -32,3 +32,12 @@ class ProductSerializer(serializers.ModelSerializer):
         product.save()
 
         return product
+
+
+class ProductSearchSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Product
+        fields = ('id', 'scientific_name', 'common_name')
+        read_only_fields = ('id', )
+

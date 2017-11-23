@@ -1,7 +1,9 @@
-from rest_framework import generics, mixins, permissions
+from django.db.models import Q
+from rest_framework import generics, mixins, permissions, response
+
 from accounts.permissions import IsClientOrAdmin, IsAdmin, IsManagerOrAdmin
 
-from .serializers import ProductSerializer
+from .serializers import ProductSerializer, ProductSearchSerializer
 from .models import Product
 
 
@@ -14,6 +16,12 @@ class ProductList(mixins.ListModelMixin,
                           IsClientOrAdmin]
 
     def get(self, request, *args, **kwargs):
+        if 'qs' in request.GET:
+            queryset = self.get_queryset()
+            queryset = queryset.values('id', 'scientific_name', 'common_name')
+            serializer = ProductSearchSerializer(queryset, many=True)
+            return response.Response(serializer.data)
+
         return self.list(request, *args, **kwargs)
 
 
