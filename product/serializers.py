@@ -20,7 +20,7 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = ('id', 'scientific_name', 'common_name', 'provenance',
                   'is_threatened', 'fruit_anual_volume', 'seed_anual_volume',
                   'pulp_anual_volume', 'harvest_period', 'certification_origin',
-                  'benefit_sharing_value', 'collection_point')
+                  'benefit_sharing_value', 'collection_point', 'communities')
 
         read_only_fields = ('id',)
 

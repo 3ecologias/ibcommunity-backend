@@ -37,7 +37,8 @@ class ProjectSerializer(serializers.ModelSerializer):
         fields = ('id', 'name','target_area', 'theme_description', 'goals',
                   'specific_goals', 'activities', 'results', 'schedule',
                   'target_audience', 'project_totals', 'taxes',
-                  'community_tour', 'future_vision', 'category', 'images', 'client')
+                  'community_tour', 'future_vision', 'category', 'images',
+                  'client', 'community')
         read_only_fields = ('id',)
 
     def create(self, validated_data):

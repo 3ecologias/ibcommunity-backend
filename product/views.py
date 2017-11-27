@@ -16,7 +16,7 @@ class ProductList(mixins.ListModelMixin,
                           IsClientOrAdmin]
 
     def get(self, request, *args, **kwargs):
-        if 'qs' in request.GET:
+        if 'names' in request.GET:
             queryset = self.get_queryset()
             queryset = queryset.values('id', 'scientific_name', 'common_name')
             serializer = ProductSearchSerializer(queryset, many=True)

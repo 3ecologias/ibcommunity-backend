@@ -92,7 +92,7 @@ class CommunitySerializer(serializers.ModelSerializer):
     images = CommunityPictureSerializer(many=True)
     schools = CommunitySchoolSerializer(many=True)
     biomes = CommunityBiomesSerializer(many=True)
-    craftwork = CommunityCraftworkSerializer(many=True)
+    craftworks = CommunityCraftworkSerializer(many=True)
     address = AddressSerializer()
     products = ProductSerializer(many=True)
 
@@ -100,7 +100,7 @@ class CommunitySerializer(serializers.ModelSerializer):
         model = Community
         fields = ('id', 'name', 'geo_lat', 'geo_long', 'distance_from_capital',
                   'idh_state', 'idh_city', 'energy_type', 'families_number',
-                  'religion', 'traditional_culture', 'craftwork', 'traditional_events',
+                  'religion', 'traditional_culture', 'craftworks', 'traditional_events',
                   'sanctuaries', 'hospitals_number', 'ready_care_number', 'psf_number',
                   'address', 'leadership', 'products', 'contacts', 'images', 'schools',
                   'biomes')

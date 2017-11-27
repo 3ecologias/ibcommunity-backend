@@ -4,6 +4,7 @@ from .models import Project, ProjectCategory
 from .serializers import ProjectSerializer, ProjectCategorySerializer
 
 from accounts.permissions import IsAdmin, IsManagerOrAdmin, IsManagerClientOrAdmin
+from community.models import Community
 
 
 class ProjectList(mixins.ListModelMixin,
@@ -16,6 +17,11 @@ class ProjectList(mixins.ListModelMixin,
                           IsManagerClientOrAdmin]
 
     def get(self, request, *args, **kwargs):
+        if request.GET.get('product_id', ''):
+            product_id = int(request.GET.get('product_id', ''))
+            communities = Community.objects.filter(products=product_id)
+            queryset = Project.objects.filter(community__in=communities)
+            serializer = self.get_serializer(queryset, many=True)
         return self.list(request, *args, **kwargs)
 
 
