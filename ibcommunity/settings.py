@@ -227,3 +227,19 @@ CORS_ALLOW_METHODS = (
     'POST',
     'PUT',
 )
+
+# Celery
+CELERY_BROKER_URL = 'amqp://localhost'
+
+# Email configuration
+
+DEFAULT_FROM_EMAIL = env('IB_EMAIL_ADDR')
+# EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# SENDGRID_API_KEY = "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"
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = '3ecologias'
+EMAIL_HOST_PASSWORD = 'Tatub0lana0b0la'
+EMAIL_USE_TLS = True

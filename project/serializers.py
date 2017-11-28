@@ -31,6 +31,7 @@ class ProjectCategorySerializerNested(serializers.ModelSerializer):
 class ProjectSerializer(serializers.ModelSerializer):
     images = ProjectPictureSerializer(many=True, read_only=True)
     category = ProjectCategorySerializerNested(many=True)
+    community = serializers.StringRelatedField()
 
     class Meta:
         model = Project
