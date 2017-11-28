@@ -1,0 +1,45 @@
+{% load i18n %}
+
+<p>{% trans 'O cliente' %} {{ client.user.get_full_name }} {% trans 'deseja apoiar o projeto'%} {{ project.name }}</p>
+<br>
+<p>{% trans 'Segue os dados do cliente' %}:</p><br>
+<table>
+    <thead>
+    <tr>
+        <th>{% trans 'Nome'%}</th>
+        <th>{% trans 'Empresa'%}</th>
+        <th>{% trans 'CNPJ da empresa'%}</th>
+        <th>{% trans 'Telefone'%}</th>
+        <th>{% trans 'Email'%}</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ client.user.get_full_name }}</td>
+            <td>{{ client.company.name }}</td>
+            <td>{{ client.company.cnpj }}</td>
+            <td>{{ client.user.profile.phone }}</td>
+            <td>{{ client.user.email }}</td>
+        </tr>
+    </tbody>
+</table><br>
+<p>{% trans 'Segue os dados do projeto' %}:</p><br>
+<table>
+    <thead>
+    <tr>
+        <th>{% trans 'Nome'%}</th>
+        <th>{% trans 'Total'%}</th>
+        <th>{% trans 'Comunidade'%}</th>
+
+    </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ project.name }}</td>
+            <td>{{ project.project_totals }}</td>
+            <td>{{ project.community }}</td>
+        </tr>
+    </tbody>
+</table><br>
+
+<p>{% trans 'Favor, entre em contato com o cliente.' %}</p>

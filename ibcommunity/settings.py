@@ -1,5 +1,6 @@
 import os
 import environ
+import datetime
 
 # Localizate the root dir, two levels above
 ROOT_DIR = environ.Path(__file__) - 2
@@ -47,6 +48,7 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'djoser',
     'material',
+    'corsheaders'
 ]
 
 LOCAL_APPS = [
@@ -56,7 +58,8 @@ LOCAL_APPS = [
     'company',
     'product',
     'project',
-    'providers'
+    'providers',
+    'family'
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -64,6 +67,7 @@ INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -197,6 +201,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Rest Framework Setup
 
 REST_FRAMEWORK = {
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.FormParser',
+        'rest_framework.parsers.JSONParser',
+        'rest_framework.parsers.MultiPartParser',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         # 'rest_framework.authentication.SessionAuthentication',
@@ -205,4 +214,33 @@ REST_FRAMEWORK = {
 
 JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(weeks=1),
 }
+
+# Cors Configuration
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+)
+
+# Celery
+CELERY_BROKER_URL = 'amqp://localhost'
+
+# Email configuration
+
+DEFAULT_FROM_EMAIL = env('IB_EMAIL_ADDR')
+# EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# SENDGRID_API_KEY = "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"
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = '3ecologias'
+EMAIL_HOST_PASSWORD = 'Tatub0lana0b0la'
+EMAIL_USE_TLS = True
