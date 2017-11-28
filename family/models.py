@@ -35,7 +35,7 @@ class Family(models.Model):
                                         blank=True, null=True)
     leader_name = models.CharField(_("Nome do líder da família"), max_length=255,
                                    blank=True, null=True)
-    leader_sex = models.CharField(_("Sexo do líder da família"), choices=SEX_CHOICES,
+    leader_sex = models.CharField(_("Sexo do líder da família"), max_length=255, choices=SEX_CHOICES,
                                   blank=True, null=True)
     leader_phone = models.CharField(_("Telefone do líder da família"), max_length=50,
                                     blank=True, null=True)
