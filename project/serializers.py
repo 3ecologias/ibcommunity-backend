@@ -2,6 +2,8 @@ from rest_framework import serializers
 
 from .models import Project, ProjectCategory, ProjectPicture
 
+from community.serializers import CommunityProductListSerializer
+
 
 class ProjectPictureSerializer(serializers.ModelSerializer):
 
@@ -31,7 +33,7 @@ class ProjectCategorySerializerNested(serializers.ModelSerializer):
 class ProjectSerializer(serializers.ModelSerializer):
     images = ProjectPictureSerializer(many=True, read_only=True)
     category = ProjectCategorySerializerNested(many=True)
-    community = serializers.StringRelatedField()
+    community = CommunityProductListSerializer()
 
     class Meta:
         model = Project

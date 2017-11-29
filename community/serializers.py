@@ -6,7 +6,7 @@ from .models import Community, CommunityContacts, CommunityLeadership, Community
 
 from address.models import Address
 from address.serializers import AddressSerializer
-from product.serializers import ProductSerializer
+from product.serializers import ProductSerializer, ProductSearchSerializer
 
 
 class CommunityLeadershipTypeSerializer(serializers.ModelSerializer):
@@ -154,3 +154,11 @@ class CommunityListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Community
         fields = ('name', 'address', 'images')
+
+
+class CommunityProductListSerializer(serializers.ModelSerializer):
+    products = ProductSearchSerializer(many=True)
+
+    class Meta:
+        model = Community
+        fields = ('id' ,'name', 'products')
