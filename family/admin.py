@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Family, FamilySources, FamilyPictures, FamilyHealthProblem
+from .models import Family, FamilySources, FamilyPictures, FamilyHealthProblem, FamilyDemography
 
 
 class FamilyAdmin(admin.ModelAdmin):
@@ -23,7 +23,14 @@ class FamilyHealthProblemAdmin(admin.ModelAdmin):
     icon = '<i class="material-icons">healing</i>'
 
 
+class FamilyDemographyAdmin(admin.ModelAdmin):
+    model = FamilyDemography
+    icon = '<i class="material-icons">trending_up</i>'
+    search_fields = ('family__family_name', )
+
+
 admin.site.register(Family, FamilyAdmin)
 admin.site.register(FamilySources, FamilySourcesAdmin)
 admin.site.register(FamilyPictures, FamilyPicturesAdmin)
 admin.site.register(FamilyHealthProblem, FamilyHealthProblemAdmin)
+admin.site.register(FamilyDemography, FamilyDemographyAdmin)

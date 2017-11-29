@@ -50,8 +50,8 @@ class Family(models.Model):
                                              help_text=_("Descrição das doenças crônicas e sobre condições "
                                                          "de saúde da família "))
     incoming_sources = models.ForeignKey(FamilySources, verbose_name=_("Fontes de renda"),
-                                              help_text=_("Descrição da principal fonte de renda do "
-                                                          "representante da família"))
+                                         help_text=_("Descrição da principal fonte de renda do "
+                                                     "representante da família"))
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -81,3 +81,27 @@ class FamilyPictures(models.Model):
     def __str__(self):
         return self.name
 
+
+class FamilyDemography(models.Model):
+    family = models.OneToOneField(Family, verbose_name=_("Família relacionada"))
+    man_number = models.PositiveIntegerField(_("Número de homens"), default=0,
+                                             help_text=_("Quantidade de homens entre 18-65 anos da família"))
+    woman_number = models.PositiveIntegerField(_("Número de mulheres"), default=0,
+                                               help_text=_("Quantidade de mulheres entre 18-65 anos da família"))
+    young_man_number = models.PositiveIntegerField(_("Número de homens jovens"), default=0,
+                                                   help_text=_("Quantidade de homens entre 12-24 anos da família"))
+    young_woman_number = models.PositiveIntegerField(_("Número de mulheres jovens"), default=0,
+                                                     help_text=_("Quantidade de mulheres entre 12-24 anos da família"))
+    kids_number = models.PositiveIntegerField(_("Número de crianças"), default=0,
+                                              help_text=_("Quantidade de crianças da família"))
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = _("Demografia Famílias")
+        verbose_name_plural = _("Demografia das Famílias")
+        ordering = ['-created_at']
+
+
+    def __str__(self):
+        return self.family
