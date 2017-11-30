@@ -10,7 +10,7 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify
 
 urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')),
-    url(r'^$', admin.site.urls),
+    url(r'^', admin.site.urls),
     url(r'^', include('accounts.urls', namespace='accounts')),
     url(r'^', include('project.urls', namespace='project')),
     url(r'^', include('company.urls', namespace='company')),
