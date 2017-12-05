@@ -220,15 +220,6 @@ JWT_AUTH = {
 # Cors Configuration
 CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ALLOW_METHODS = (
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-)
-
 # Celery
 CELERY_BROKER_URL = 'amqp://localhost'
 
