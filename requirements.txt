@@ -13,4 +13,8 @@ django-environ==0.4.4
 psycopg2
 django-material==1.1.1
 Celery==4.1.0
+<<<<<<< HEAD
 django-cors-headers
+=======
+django-cors-headers==2.1.0
+>>>>>>> 806e2991378b8d3b3e0ee815c220388b2d761c55
