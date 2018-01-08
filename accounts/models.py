@@ -50,3 +50,13 @@ class Client(models.Model):
     def __str__(self):
         return self.user.get_full_name()
 
+
+"""
+    set email unique in User model.
+"""
+def set_email_as_unique():
+
+    email_field = dict([(field.name, field) for field in User._meta.fields])["email"]
+    setattr(email_field, '_unique', True)
+
+set_email_as_unique()
