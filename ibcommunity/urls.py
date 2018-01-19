@@ -18,9 +18,8 @@ urlpatterns = [
     url(r'^', include('product.urls', namespace='product')),
     url(r'^', include('community.urls', namespace='community')),
     url(r'^', include('providers.urls', namespace='providers')),
-    url(r'^auth/', include('djoser.urls')),
-    url(r'^auth/', include('djoser.urls.jwt')),
 
+    url(r'^api/auth/', include('ibcommunity.api.urls')), # API Auth
 ]
 
 if settings.DEBUG:
