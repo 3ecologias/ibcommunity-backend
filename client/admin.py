@@ -9,8 +9,5 @@ class ProfileAdmin(admin.ModelAdmin):
 class ClientAdmin(admin.ModelAdmin):
     icon = '<i class="material-icons">account_box</i>'
 
-
-
-
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Client, ClientAdmin)
