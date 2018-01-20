@@ -52,7 +52,7 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    'accounts',
+    'accounts.apps.AccountsConfig',
     'address',
     'community',
     'company',
@@ -148,6 +148,8 @@ if not DEBUG:
         }
     }
 
+# New User Base
+AUTH_USER_MODEL = 'accounts.MyUser'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
