@@ -6,7 +6,7 @@ from .serializers import ProjectSerializer, ProjectCategorySerializer
 from .tasks import project_support_request
 
 from accounts.permissions import IsAdmin, IsManagerOrAdmin, IsManagerClientOrAdmin
-from accounts.models import Client
+from client.models import Client
 from community.models import Community
 
 
