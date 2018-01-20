@@ -1,10 +1,11 @@
 from rest_framework import generics, mixins, permissions
 
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
-from accounts.api.serializers import UserSerializer
+from accounts.api.serializer import UserSerializer
 from accounts.api.permissions import IsAdmin, IsClientOrAdmin, IsProfileOwner, IsClientOwner
 
+User = get_user_model()
 
 class UserList(mixins.ListModelMixin, generics.GenericAPIView):
 
