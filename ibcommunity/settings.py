@@ -59,7 +59,8 @@ LOCAL_APPS = [
     'product',
     'project',
     'providers',
-    'family'
+    'family',
+    'client',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
