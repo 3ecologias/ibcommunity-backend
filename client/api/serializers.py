@@ -1,10 +1,6 @@
-from _ast import Add
-
 from rest_framework import serializers
 
-from django.contrib.auth.models import User
-
-from accounts.models import Profile, Client
+from client.models import Profile, Client
 
 from project.models import Project
 from address.serializers import AddressSerializer
@@ -86,14 +82,3 @@ class ClientDetailSerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
-
-
-class UserSerializer(serializers.ModelSerializer):
-
-    profile = serializers.PrimaryKeyRelatedField(queryset=Profile.objects.all())
-    client = serializers.PrimaryKeyRelatedField(queryset=Client.objects.all())
-
-    class Meta:
-        model = User
-        fields = ('id', 'username', 'profile', 'client')
-        read_only_fields = ('id',)

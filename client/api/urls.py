@@ -2,7 +2,7 @@ from django.conf.urls import url
 
 from rest_framework.urlpatterns import format_suffix_patterns
 
-from accounts.views import ProfileList, ProfileDetail, ProfileCreate,\
+from client.views import ProfileList, ProfileDetail, ProfileCreate,\
                    ClientList, ClientDetail, ClientCreate,\
                    UserList, UserDetail, UserCreate
 
