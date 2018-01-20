@@ -102,3 +102,4 @@ class IsClientOwner(IsSuperAdmin):
                 return True
         
         return super(IsClientOwner, self).has_object_permission(request, view, obj)
+
