@@ -5,8 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.conf import settings
 
 from .models import Project
-from accounts.models import Client
-
+from client.models import Client
 
 @shared_task
 def project_support_request(client_id, project_id):
