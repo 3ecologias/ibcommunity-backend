@@ -11,6 +11,12 @@ URLs maps using in application.
     * refresh-token/ -> refresh_jwt_token
     * verify-token/ -> verify_jwt_token
 
+#### Examples
+#### Get Token (Remember, the e-mail is you login.)
+    curl -X POST -d "email=seu@email.com&password=suasenha" http://127.0.0.1:8000/api/auth/token
+#### Access protect URLs  
+    cur -H "Authorization: JWT <YOUR-TOKEN>" http://127.0.0.1:8000/api/user/list/
+
 ## Base Auth URLs (end pont)
 
 * api/auth/  (base path for auth)
