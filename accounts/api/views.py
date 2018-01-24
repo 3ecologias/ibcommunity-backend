@@ -22,15 +22,20 @@ class UserCreateAPIView(CreateAPIView):
     """
         API for Create User
     """
+    http_method_names = ['post', ]
     serializer_class = UserCreateSerializer
     queryset = User.objects.all()
     permission_classes = [AllowAny]
+
+    def get(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
 class UserListAPIView(ListAPIView):
     """
         API for Lister Users
     """
+    http_method_names = ['get', ]
     serializer_class = UserListSerializer
     queryset = User.objects.all()
     permission_classes = [IsAdminUser]
