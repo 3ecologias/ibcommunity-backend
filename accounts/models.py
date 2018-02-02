@@ -35,11 +35,17 @@ class MyUserManager(BaseUserManager):
 
 
 class MyUser(AbstractBaseUser):
+    id = models.AutoField(primary_key=True)
     email = models.EmailField(
         verbose_name=_('email address'),
         max_length=255,
         unique=True,
     )
+    full_name = models.CharField(_('full_name'), max_length=255, blank=True)
+    first_name = models.CharField(_('first_name'), max_length=255, blank=True)
+    last_name = models.CharField(_('last_name'), max_length=255, blank=True)
+    phone = models.CharField(_('phone_number'), max_length=30, blank=True)
+
     #date_of_birth = models.DateField()
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
