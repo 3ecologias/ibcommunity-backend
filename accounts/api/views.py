@@ -7,6 +7,11 @@ from rest_framework.generics import (
     ListAPIView,
     UpdateAPIView,
     RetrieveAPIView,
+    GenericAPIView,
+)
+
+from rest_framework.mixins import (
+    CreateModelMixin
 )
 
 from rest_framework.permissions import (
@@ -17,17 +22,14 @@ from rest_framework.permissions import (
 
 
 User = get_user_model() #Return User Model
+class UserCreateAPIView(CreateModelMixin, GenericAPIView):
 
-class UserCreateAPIView(CreateAPIView):
-    """
-        API for Create User
-    """
     http_method_names = ['post', ]
-    serializer_class = UserCreateSerializer
     queryset = User.objects.all()
+    serializer_class = UserCreateSerializer
     permission_classes = [AllowAny]
 
-    def get(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
 
