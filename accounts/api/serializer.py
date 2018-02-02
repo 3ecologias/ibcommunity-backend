@@ -4,6 +4,8 @@ from rest_framework.validators import UniqueValidator
 
 from django.contrib.auth.models import User
 from client.models import Profile, Client
+from company.models import Company
+from company.serializers import CompanySerializer
 
 from rest_framework.serializers import (
     EmailField,
@@ -14,6 +16,37 @@ from rest_framework.serializers import (
 
 User = get_user_model()
 
+class UserCreateSerializer(ModelSerializer):
+
+    company = CompanySerializer()
+    full_name = CharField(label=_('Full Name'), max_length=255)
+
+    class Meta:
+        model = User
+        fields = ('id', 'full_name', 'phone', 'email', 'password', 'company',)
+        read_only_fields = ('id',)
+
+    def create_client(self, user, company):
+        Client.objects.create(user=user, company=company)
+
+    def create(self, validated_data):
+
+        company_data = validated_data.pop('company')
+        company = Company.objects.create(**company_data)
+
+        full_name = validated_data['full_name']
+        full_name = full_name.split()
+        first_name = full_name[0]
+        last_name = full_name[1]
+        user = User(**validated_data)
+        user.first_name = first_name
+        user.last_name = last_name
+        user.phone = validated_data['phone']
+        user.company = company_data
+        user.save()
+        self.create_client(user, company)
+        return user
+
 class UserSerializer(ModelSerializer):
 
     profile = PrimaryKeyRelatedField(queryset=Profile.objects.all())
@@ -23,22 +56,6 @@ class UserSerializer(ModelSerializer):
         model = User
         fields = ('id', 'email', 'profile', 'client')
         read_only_fields = ('id',)
-
-class UserCreateSerializer(ModelSerializer):
-    """
-        Create User, username and email Unique and password minimal 8 caracteres
-    """
-    email = EmailField(label=_('E-mail'), required=True,validators=[UniqueValidator(queryset=User.objects.all())])
-    password = CharField(label=_('Password'), min_length=8)
-
-    def create(self, validated_data):
-        user = User.objects.create_user(validated_data['email'],
-             validated_data['password'])
-        return user
-
-    class Meta:
-        model = User
-        fields = ('id', 'email', 'password')
 
 class UserListSerializer(ModelSerializer):
     """
