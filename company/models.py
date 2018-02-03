@@ -9,10 +9,9 @@ class Company(models.Model):
     company_reg = models.CharField(_("CNPJ"), max_length=255, blank=False)
     sector = models.CharField(_("Setor"), max_length=255, blank=False)
     type = models.CharField(_("Tipo"), max_length=255, blank=False)
-    #address = models.OneToOneField(Address, verbose_name=_("Endereço"),
-    #                               max_length=255, blank=True,
-    #                               related_name="company"
-    #                               )
+    address = models.OneToOneField(Address, verbose_name=_("Endereço"),
+                                   max_length=255, blank=False,
+                                   related_name="company")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
