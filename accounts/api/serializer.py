@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
-from rest_framework.validators import UniqueValidator
+from rest_framework.validators import UniqueValidator, ValidationError
 
 from django.contrib.auth.models import User
 from client.models import Profile, Client
@@ -37,9 +37,13 @@ class UserCreateSerializer(ModelSerializer):
         full_name = validated_data.pop('full_name')
         full_name = full_name.split()
         first_name = full_name[0]
-        last_name = full_name[1]
+        try:
+            last_name = full_name[1]
+        except IndexError:
+            raise ValidationError('Por favor informe seu nome completo')
         phone = validated_data.pop('phone')
         user = User.objects.create_user(**validated_data)
+        user.full_name = first_name + ' ' + last_name
         user.first_name = first_name
         user.last_name = last_name
         user.phone = phone
