@@ -11,15 +11,16 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify
 urlpatterns = [
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^', admin.site.urls),
-    url(r'^api/user/', include('accounts.api.urls', namespace='accounts')), #API for Users - URLs
+    url(r'^', include('accounts.urls', namespace='accounts')),
     url(r'^', include('project.urls', namespace='project')),
     url(r'^', include('company.urls', namespace='company')),
     url(r'^', include('address.urls', namespace='address')),
     url(r'^', include('product.urls', namespace='product')),
     url(r'^', include('community.urls', namespace='community')),
     url(r'^', include('providers.urls', namespace='providers')),
+    url(r'^auth/', include('djoser.urls')),
+    url(r'^auth/', include('djoser.urls.jwt')),
 
-    url(r'^api/auth/', include('ibcommunity.api.urls')), # API Auth - URLs
 ]
 
 if settings.DEBUG:

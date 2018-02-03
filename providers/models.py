@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from .constants import EPI_CHOICES, EPI_ORIGIN_CHOICES, HYGIENE_CHOICES, DRY_ROOF_TYPE_CHOICES
 
-from client.models import Client
+from accounts.models import Client
 from product.models import Product
 from community.models import Community
 
