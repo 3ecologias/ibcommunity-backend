@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from community.models import Community
-from accounts.models import Client
+from client.models import Client
 
 
 class ProjectCategory(models.Model):
@@ -25,27 +25,19 @@ class Project(models.Model):
     activities = models.TextField(_("Atividades a serem desenvolvidas"), blank=True, null=True)
     results = models.TextField(_("Resultados esperados"), blank=True, null=True)
     schedule = models.FileField(_("Cronograma"),
-                                upload_to="project/schedules/%y/%m",
-                                blank=True,
-                                null=True,
-                                help_text=_("Arquivo PDF com o cronograma do projeto"))
+                                upload_to="project/schedules/%y/%m", blank=True,
+                                null=True, help_text=_("Arquivo PDF com o cronograma do projeto"))
     target_audience = models.TextField(_("Público alvo"), blank=True)
     budget = models.FileField(_("Orçamento"),
-                              upload_to="project/budgets/%y/%m",
-                              blank=True,
-                              null=True,
-                              help_text=_("Aquivo PDF com o orçamento do projeto"))
+                              upload_to="project/budgets/%y/%m", blank=True,
+                              null=True, help_text=_("Aquivo PDF com o orçamento do projeto"))
     project_totals = models.DecimalField(_("Valor total do projeto"),
                                          max_digits=20,
-                                         decimal_places=2,
-                                         blank=True, null=True)
+                                         decimal_places=2, blank=True, null=True)
     taxes = models.DecimalField(_("Valor do administrativo"),
                                 max_digits=5,
                                 decimal_places=2,
-                                blank=True,
-                                null=True,
-                                help_text="Percentagem do valor do projeto que será\
-                                 destinado ao administrativo",)
+                                blank=True, null=True, help_text="Percentagem do valor do projeto que será destinado ao administrativo",)
     community_tour = models.BooleanField(_("Visita comunitária"),
                                          blank=True,
                                          help_text=_("Assinala caso seja projeto de visita\
