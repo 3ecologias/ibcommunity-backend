@@ -104,3 +104,8 @@ venv.bak/
 
 # pycharm project file
 .idea/
+
+*/migrations/*
+tmp/*
+*.db
+*.db-bkp
