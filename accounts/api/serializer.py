@@ -34,14 +34,15 @@ class UserCreateSerializer(ModelSerializer):
         company_data = validated_data.pop('company')
         company = Company.objects.create(**company_data)
 
-        full_name = validated_data['full_name']
+        full_name = validated_data.pop('full_name')
         full_name = full_name.split()
         first_name = full_name[0]
         last_name = full_name[1]
-        user = User(**validated_data)
+        phone = validated_data.pop('phone')
+        user = User.objects.create_user(**validated_data)
         user.first_name = first_name
         user.last_name = last_name
-        user.phone = validated_data['phone']
+        user.phone = phone
         user.company = company_data
         user.save()
         self.create_client(user, company)
